@@ -12,7 +12,7 @@ class CarBase:
     def __init__(self, brand, photo_file_name, carrying):
         self.brand = brand
         self.photo_file_name = photo_file_name
-        self.carryng = carrying
+        self.carrying = float(carrying)
     
     def get_photo_file_ext(self):
         return os.path.splitext(self.photo_file_name)[1]
