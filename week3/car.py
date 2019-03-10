@@ -23,7 +23,7 @@ class Car(CarBase):
     
     def __init__(self, brand, photo_file_name, carrying, passenger_seats_count):
         super().__init__(brand, photo_file_name, carrying)
-        self.passenger_seats_count = passenger_seats_count
+        self.passenger_seats_count = int(passenger_seats_count)
     
     @classmethod
     def instance(cls, row):
@@ -41,14 +41,14 @@ class Truck(CarBase):
     def __init__(self, brand, photo_file_name, carrying, body_whl):
         super().__init__(brand, photo_file_name, carrying)
         try:
-            self.body_height, self.body_lenght, self.body_width = (float(i) for i in body_whl.lower().split("x", 2))
+            self.body_height, self.body_length, self.body_width = (float(i) for i in body_whl.lower().split("x", 2))
         except ValueError:
-            self.body_lenght = 0.0
+            self.body_length = 0.0
             self.body_width = 0.0
             self.body_height = 0.0
     
     def get_body_volume(self):
-        return self.body_height * self.body_lenght * self.body_width
+        return self.body_height * self.body_length * self.body_width
     
     @classmethod
     def instance(cls, row):
