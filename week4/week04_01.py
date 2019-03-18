@@ -11,7 +11,7 @@ class File:
     def write(self, content):
         with open(self.file, "w") as f:
             f.write(content)
-    
+
     def read(self):
         with open(self.file, 'r') as f:
             return f.read()
@@ -24,10 +24,10 @@ class File:
 
     def __str__(self):
         return self.file
-    
+
     def __iter__(self):
         return self
-    
+
     def __next__(self):
         with open(self.file, 'r') as f:
             f.seek(self.position)
