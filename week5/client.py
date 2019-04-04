@@ -12,7 +12,8 @@ class Client:
         self.timeout = timeout
         try:
             self.sock_connection = socket.create_connection((self.host, self.port), timeout=self.timeout)
-        except ClientError("error connect", err)
+        except socket.error as err:
+            raise ClientError("error connect", err)
 
     def _read_answer(self):
         """Метод для чтения ответа сервера"""
@@ -67,3 +68,16 @@ class Client:
             self.sock_connection.close()
         except socket.error as err:
             raise ClientError("error close connection", err)
+
+
+if __name__ == "__main__":
+    client = Client("127.0.0.1", 8888, timeout=5)
+    client.put("test", 0.5, timestamp=1)
+    client.put("test", 2.0, timestamp=2)
+    client.put("test", 0.5, timestamp=3)
+    client.put("load", 3, timestamp=4)
+    client.put("load", 4, timestamp=5)
+    print(client.get("load"))
+    print(client.get("*"))
+
+    client.close()
